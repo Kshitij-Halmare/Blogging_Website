@@ -1,0 +1,150 @@
+/* General Editor.js Styles */
+.textEditor {
+    @apply bg-white p-6 border border-gray-300 rounded-lg shadow-md;
+    font-family: 'Arial', sans-serif;
+}
+  
+/* Header Tool */
+.textEditor h1, .textEditor h2, .textEditor h3 {
+    @apply font-bold text-2xl md:text-3xl text-green-800 mb-4;
+}
+  
+/* List Tool (Bullet/Ordered List) */
+.textEditor ul, .textEditor ol {
+    @apply list-inside pl-5 space-y-2;
+}
+
+.textEditor ul {
+    @apply list-disc;
+}
+
+.textEditor ol {
+    @apply list-decimal;
+}
+
+/* List Item Styling */
+.textEditor li {
+    @apply text-lg text-gray-700;
+}
+
+/* Checklist specific styles */
+.textEditor .ce-block[data-type="list"] .ce-list--checklist {
+    @apply list-inside pl-5 space-y-2;
+}
+
+.textEditor .ce-block[data-type="list"] .ce-list--checklist li {
+    @apply flex items-center text-lg text-gray-700;
+}
+
+/* Checkbox Styles for List Items */
+.textEditor .ce-block[data-type="list"] .ce-list--checklist input[type="checkbox"] {
+    @apply mr-2 text-blue-600;
+}
+
+/* Image Tool */
+.textEditor .ce-block img {
+    @apply rounded-lg shadow-md w-full object-cover;
+    max-width: 100%;
+}
+
+/* Block Styles */
+.textEditor .ce-block {
+    @apply my-4;
+}
+
+/* Image Centering */
+.textEditor .ce-image {
+    @apply flex justify-center items-center;
+}
+
+/* Quote Tool */
+.textEditor blockquote {
+    @apply bg-gray-100 p-4 border-l-4 border-blue-500 italic text-xl text-gray-700 my-6;
+    font-style: italic;
+}
+
+/* Quote Text */
+.textEditor blockquote p {
+    @apply text-lg;
+}
+
+/* Quote Footer */
+.textEditor blockquote footer {
+    @apply text-right font-semibold text-gray-500;
+}
+
+/* Marker Tool */
+.textEditor .ce-marker {
+    @apply bg-yellow-400 px-1 py-0.5 rounded-lg text-black font-semibold;
+    text-decoration: underline;
+}
+
+/* Code Tool */
+.textEditor pre {
+    @apply bg-gray-900 text-white rounded-lg p-4 my-4 overflow-x-auto font-mono;
+}
+
+.textEditor code {
+    @apply bg-gray-800 text-white rounded-md px-2 py-1;
+}
+
+/* Embed Tool */
+.textEditor iframe {
+    @apply rounded-lg shadow-md w-full h-80;
+    max-width: 100%;
+}
+
+/* Custom styles for the editor container and toolbar */
+.textEditor .ce-toolbar {
+    @apply px-4 py-2;
+    border-radius: 0.375rem 0.375rem 0 0;
+    opacity: 0; /* Hide the toolbar by default */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for toolbar visibility */
+}
+
+/* Show the toolbar on hover */
+.textEditor:hover .ce-toolbar {
+    opacity: 1; /* Show the toolbar when editor is hovered */
+}
+
+/* Style for the toolbar buttons */
+.textEditor .ce-toolbar button {
+    @apply bg-transparent hover:bg-blue-500 text-blue-600 font-semibold rounded-lg p-2 transition-colors duration-300;
+}
+
+.textEditor .ce-toolbar button:hover {
+    @apply bg-blue-500 text-white;
+}
+
+/* For image uploading button or placeholder */
+.textEditor .ce-toolbar__button {
+    @apply flex items-center justify-center text-gray-600 hover:text-blue-600 transition-all duration-200;
+}
+
+.textEditor .ce-toolbar__button:hover {
+    @apply text-blue-500;
+}
+
+/* Style the editor input blocks */
+.textEditor .ce-block {
+    @apply my-6;
+}
+
+.textEditor .ce-block .ce-paragraph {
+    @apply text-lg text-gray-800 mb-4;
+}
+
+.textEditor .ce-block .ce-header {
+    @apply font-bold text-xl text-gray-900 mb-4;
+}
+
+/* Customize the Placeholder in editor */
+.textEditor .ce-block[data-placeholder]:empty::before {
+    content: attr(data-placeholder);
+    color: #a0a0a0; /* Added color for placeholder text */
+}
+
+/* Apply spacing for elements */
+.textEditor .ce-block + .ce-block {
+    margin-top: 1.5rem;
+}
