@@ -18,9 +18,9 @@ function Blogcard({ content, author }) {
     const isBase64 = banner && banner.startsWith('data:image');
 
     return (
-        <div onClick={() => { navigate(`/blog/${id}`) }} className='w-full max-w-lg flex flex-col md:flex-row border-2 mt-5 hover:scale-105 transition-all duration-300 bg-white shadow-lg rounded-lg p-6 mb-7'>
+        <div onClick={() => { navigate(`/blog/${id}`) }} className='w-full max-w-4xl mx-auto flex flex-col md:flex-row border-2 mt-5 hover:scale-105 transition-all duration-300 bg-white shadow-xl rounded-lg p-6 mb-7 hover:shadow-2xl'>
             {/* Banner Image */}
-            <div className="w-full md:w-1/3 md:h-auto h-48 flex-shrink-0">
+            <div className="w-full md:w-1/3 md:h-auto h-48 flex-shrink-0 mb-4 md:mb-0">
                 <img 
                     src={isBase64 ? banner : `${banner}`} 
                     alt="Banner" 
@@ -30,15 +30,15 @@ function Blogcard({ content, author }) {
             <div className="flex flex-col justify-between p-4 flex-grow">
                 {/* Author Info */}
                 <div className='flex items-center gap-3 mb-4'>
-                    <img src={`${profile_img}`} alt="Profile" className="h-12 w-12 rounded-full object-cover" />
+                    <img src={`${profile_img}`} alt="Profile" className="h-14 w-14 rounded-full object-cover border-2 border-gray-200 shadow-sm" />
                     <div className='cursor-pointer' onClick={handleClick}>
-                        <p className='font-semibold'>{full_name}</p>
+                        <p className='font-semibold text-lg'>{full_name}</p>
                         <p className='text-sm text-gray-500'>{'@' + userName}</p>
                         <p className='text-sm text-gray-400'><GetDay timeStamp={publishedAt} /></p>
                     </div>
                 </div>
                 {/* Title */}
-                <h1 className='text-3xl font-semibold text-gray-800 mb-3'>{title}</h1>
+                <h1 className='text-2xl font-semibold text-gray-800 mb-3'>{title}</h1>
                 {/* Description */}
                 <p className='text-lg text-gray-600 mb-4 line-clamp-3'>{description}</p>
                 {/* Tags and Likes */}
