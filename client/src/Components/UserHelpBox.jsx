@@ -3,14 +3,30 @@ import { FaBook } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Authetication/Authentication';
+
 function UserHelpBox({ data }) {
   const { user, signOut } = useAuth();
-  console.log(user);
   const navigate = useNavigate();
-  const handleClick=()=>{
-    navigate(`/profile/${user.data.userName}`);
-  }
-  
+
+  const handleClick = () => {
+    if (user?.data?.userName) {
+      navigate(`/profile/${user.data.userName}`);
+    }
+  };
+
+  const handelClickDashboard = () => {
+    navigate("/dashboard/blogs");
+  };
+
+  const handelClickEditProfile = () => {
+    navigate("/dashboard/edit-profile");
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    navigate("/"); // Redirect to the homepage after sign out
+  };
+
   const animationVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
@@ -29,17 +45,17 @@ function UserHelpBox({ data }) {
       <div className="flex flex-col gap-4">
         {/* Action Items */}
         <div className="flex flex-col gap-3">
-          <div  className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer transition duration-200">
+          <div onClick={()=>navigate("/editor")} className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer transition duration-200">
             <FaBook className="text-gray-500" />
             <span className="text-gray-800 font-medium">Write</span>
           </div>
           <div onClick={handleClick} className="hover:bg-gray-100 p-2 rounded-md cursor-pointer transition duration-200">
             <span className="text-gray-800 font-medium">Profile</span>
           </div>
-          <div className="hover:bg-gray-100 p-2 rounded-md cursor-pointer transition duration-200">
+          <div onClick={handelClickDashboard} className="hover:bg-gray-100 p-2 rounded-md cursor-pointer transition duration-200">
             <span className="text-gray-800 font-medium">Dashboard</span>
           </div>
-          <div className="hover:bg-gray-100 p-2 rounded-md cursor-pointer transition duration-200">
+          <div onClick={handelClickEditProfile} className="hover:bg-gray-100 p-2 rounded-md cursor-pointer transition duration-200">
             <span className="text-gray-800 font-medium">Settings</span>
           </div>
         </div>
@@ -49,7 +65,7 @@ function UserHelpBox({ data }) {
 
         {/* User Info */}
         <div className="flex flex-col gap-3">
-          <div onClick={signOut} className="hover:bg-red-50 p-2 rounded-md cursor-pointer text-red-600 font-medium transition duration-200">
+          <div onClick={handleSignOut} className="hover:bg-red-50 p-2 rounded-md cursor-pointer text-red-600 font-medium transition duration-200">
             Sign Out
           </div>
           <div className="text-gray-700 font-medium">
@@ -60,10 +76,5 @@ function UserHelpBox({ data }) {
     </motion.div>
   );
 }
-  // <button
-  //               onClick={signOut}
-  //               className="bg-gray-900 text-white rounded-full px-6 py-3 font-semibold hover:bg-gray-800 transition-colors duration-300 ease-in-out"
-  //             >
-  //               Sign Out
-  //             </button>
+
 export default UserHelpBox;

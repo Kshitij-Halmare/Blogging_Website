@@ -61,7 +61,7 @@ function Navbar() {
       <div className="flex items-center md:justify-center justify-between w-full">
         <div className="h-14 w-14">
           <Link to="/" className="h-14 w-14">
-            <img src={logo} alt="Logo" className="h-full" />
+            <img src={`${"data:image/jpeg;base64",logo}`} alt="Logo" className="h-full" />
           </Link>
         </div>
         <div className="hidden md:flex flex-1 justify-center px-4">

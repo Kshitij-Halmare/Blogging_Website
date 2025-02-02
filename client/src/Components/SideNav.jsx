@@ -80,7 +80,7 @@ function SideNav() {
                             </>
                             </NavLink>
                             <NavLink
-                                to="/dashboard/write"
+                                to="/editor"
                                 onClick={() => setPageState('Write')}
                                 className={({ isActive }) =>
                                     `flex items-center gap-3 p-2 rounded-lg transition-all duration-200 ${

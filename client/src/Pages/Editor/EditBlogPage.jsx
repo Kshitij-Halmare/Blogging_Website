@@ -160,7 +160,7 @@ function EditBlogPage() {
         }))
       }
     },[]);
-    const userId = user.data.email;
+    const userId = user?.data?.email;
   const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         if (!file) {

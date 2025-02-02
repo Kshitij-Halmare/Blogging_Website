@@ -102,12 +102,12 @@ function Signin() {
           >
             Sign In
           </button>
-          <div>
+          {/* <div>
             <button className="flex mt-5 px-8 shadow-xl rounded-full hover:scale-105 bg-black text-white p-2">
               <FaGoogle className="mt-1" />
               <span className="pl-3">Continue with Google</span>
             </button>
-          </div>
+          </div> */}
           <p>
             Don't Have an Account?{" "}
             <span

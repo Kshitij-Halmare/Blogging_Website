@@ -81,12 +81,12 @@ function SignUp() {
                     <button onClick={handleSubmit} className='mt-3 font-serif shadow-xl hover:scale-105 bg-black text-white rounded-full px-4 py-2'>
                         Sign Up
                     </button>
-                    <div className=''>
+                    {/* <div className=''>
                         <button className='flex mt-5 px-8 shadow-xl rounded-full hover:scale-105  bg-black text-white p-2'>
                             <FaGoogle className='mt-1' />
                             <span className='pl-3'>Continue with Google</span>
                         </button>
-                    </div>
+                    </div> */}
                     <p>Already Have an Account? <span onClick={() => { navigate("/signin") }} className='text-gray-700 hover:text-gray-900 cursor-pointer'>Sign in</span></p>
                 </div>
             </div>
