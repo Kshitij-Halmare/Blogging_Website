@@ -6,7 +6,10 @@ import CommentCard from './CommentCard';
 
 function CommentFeild({ action, index = undefined, replyingTo = undefined, setReplying }) {
     const { blog, blog_id, setBlog, totalParentsCommentsLoaded, settotalParentsCommentsLoaded } = useContext(BlogContext);
-    const { user } = useAuth();
+    const { user,loading } = useAuth();
+    if(loading){
+        return <div>Loading...</div>
+    }
     const [textArea, setTextArea] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -21,6 +24,7 @@ function CommentFeild({ action, index = undefined, replyingTo = undefined, setRe
     // Function to handle adding a new comment
     const handleComment = async () => {
         if (user) {
+            console.log(user);
             if (!textArea.trim().length) {
                 return toast("Write Something to add a comment");
             }
