@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetDay } from './getDay'; // Corrected the import statement
+import { GetDay } from './GetDay'; // Corrected the import statement
 import { FiHeart } from 'react-icons/fi'; // Heart icon
 import { useNavigate } from 'react-router-dom';
 
