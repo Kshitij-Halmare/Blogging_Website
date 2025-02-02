@@ -31,7 +31,8 @@ function SignUp() {
 
         const resData = await response.json();
         if (resData.success) {
-            toast.success("User Signed Up SuccessFully");
+            toast.success("User Signed Up SuccessFully Please Login to Continue");
+            navigate("/signin");
         } else {
             toast.error(resData.message);
         }
