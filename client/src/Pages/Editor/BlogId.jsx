@@ -14,8 +14,11 @@ function BlogId() {
   let blogId = useParams();
   blogId = blogId.id;
   const [blog, setBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const [loading1, setLoading1] = useState(true);
+  const { user,loading } = useAuth();
+  if(loading){
+    return <div>Loading...</div>
+  }
   const [category, setCategory] = useState('');
   const [relBlog, setRelBlog] = useState([]);
   const navigate = useNavigate();
@@ -126,7 +129,7 @@ function BlogId() {
     } catch (error) {
       console.error('Error fetching blog details:', error);
     } finally {
-      setLoading(false);
+      setLoading1(false);
     }
   }, [blogId]);
 
@@ -163,7 +166,7 @@ function BlogId() {
   }, [category, getSpecificBlog]);
 
   // Show loading state while the data is being fetched
-  if (loading) {
+  if (loading1) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="animate-spin inline-block w-16 h-16 border-4 border-t-blue-500 border-gray-200 rounded-full"></div>
@@ -262,7 +265,7 @@ function BlogId() {
     });
   };
 
-
+  console.log(user);
 
 
   return (
@@ -344,7 +347,7 @@ function BlogId() {
                 {
                   user ? (
                     <div onClick={() => { navigate(`/editBlog/${blog.blog_id}`) }}
-                      className={`px-4 py-2 bg-slate-300 cursor-pointer ${author.personal_info.userName === user.data.userName ? 'block' : 'hidden'} hover:bg-slate-400 rounded-sm`}
+                      className={`px-4 py-2 bg-slate-300 cursor-pointer ${author.personal_info.userName === user.userName ? 'block' : 'hidden'} hover:bg-slate-400 rounded-sm`}
                     >
                       Edit
                     </div>

@@ -147,8 +147,11 @@ import { useAuth } from '../../Authetication/Authentication';
 
 function EditBlogPage() {
   const { blog, setBlog, textEditor, setTextEditor } = useContext(EditorContext);
-    const { user } = useAuth();
-    const [loading, setLoading] = useState(false);
+    const { user,loading } = useAuth();
+    if(loading){
+      return <div>Loading...</div>
+    }
+    const [loading1, setLoading1] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
     useEffect(()=>{
       if(!textEditor.isReady){
@@ -172,7 +175,7 @@ function EditBlogPage() {
         formData.append('image', file);
     
         try {
-          setLoading(true);
+          setLoading1(true);
     
           // Display the image preview immediately after selection
           const reader = new FileReader();
@@ -206,7 +209,7 @@ function EditBlogPage() {
           console.error('Error uploading image:', error);
           toast.error('Error uploading image');
         } finally {
-          setLoading(false);
+          setLoading1(false);
         }
       };
   return (
@@ -217,7 +220,7 @@ function EditBlogPage() {
           <div className='mx-auto max-w-[900px] w-full '>
           <div className='relative aspect-video bg-white border-4 border-gray hover:opacity-80'>
                <label htmlFor="uploadImage" className="cursor-pointer">
-                 {loading ? (
+                 {loading1 ? (
                    <div className="flex items-center justify-center h-full">
                      <p className="text-gray-500 font-semibold">Uploading...</p>
                    </div>
