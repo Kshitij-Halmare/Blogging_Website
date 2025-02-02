@@ -150,7 +150,7 @@ function Home() {
                                     {specificBlogs.length > 0 ? (
                                         <>
                                             <h1 className="text-2xl font-bold mb-6">{selectedCategory}</h1>
-                                            <div className="flex flex-col md:flex-row md:flex-wrap gap-8">
+                                            <div className="flex flex-col md:flex-row md:flex-wrap gap-8 w-full">
                                                 {specificBlogs.map((blog, index) => (
                                                     <AnimationWrapper key={index} transition={{ duration: 1, delay: index * 0.1 }}>
                                                         <Blogcard content={blog} author={blog.author} />
