@@ -10,6 +10,7 @@ A modern blogging platform with **secure authentication, real-time content creat
 ✅ **📝 Dynamic Content Creation** – **Editor.js** and **Cloudinary** allow smooth **blog writing, image uploads, and real-time content updates**. ⚡  
 ✅ **💬 Engaging User Experience** – **Framer Motion animations** and interactive features like **likes & comments** enhance user engagement. 🎭  
 ✅ **📢 Real-time Notifications** – Get instant updates on new blog posts and comments. 🔔  
+✅ **🔎 Similar Blog Discovery** – Find related blogs through **tags and author names** for a more personalized reading experience.  
 
 ---
 
