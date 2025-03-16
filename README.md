@@ -17,13 +17,19 @@ A modern blogging platform with **secure authentication, real-time content creat
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](screenshots/homepage.png)
+![Home Page](Screenshot_16-3-2025_181124_blogging-website-1-semf.onrender.com.jpeg)
 
 ### 📝 Blog Editor
-![Blog Editor](screenshots/blog-editor.png)
+![Blog Editor](Screenshot_16-3-2025_181346_blogging-website-1-semf.onrender.com.jpeg)
+
+### 📝 Blog Editor
+![Blog Editor](Screenshot_16-3-2025_181556_blogging-website-1-semf.onrender.com.jpeg)
+
+### 📝 Blog Section
+![Blog Editor](Screenshot_16-3-2025_18170_blogging-website-1-semf.onrender.com.jpeg)
 
 ### 💬 Comments Section
-![Comments](screenshots/comments.png)
+![Comments](Screenshot_16-3-2025_181733_blogging-website-1-semf.onrender.com.jpeg)
 
 ---
 
