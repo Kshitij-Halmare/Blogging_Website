@@ -9,7 +9,10 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5173' }));
+const allowedOrigins = [
+  'http://localhost:5173', // for local development
+  'https://blogging-website-1-semf.onrender.com' // deployed front-end
+];
 dotenv.config();
 
 // Routes
