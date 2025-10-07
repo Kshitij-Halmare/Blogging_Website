@@ -14,7 +14,7 @@ function SearchBar() {
     const [isLoading, setIsLoading] = useState(false); // State to handle loading state
     const [dataPerson, setDataPerson] = useState([]); // Store the user data
     const category = query;
-  
+    const navigate=useNavigate();
     // Function to fetch blogs based on query and page number
     const fetchBlogs = async () => {
         setIsLoading(true);
@@ -97,7 +97,8 @@ function SearchBar() {
             fetchBlogs(); // Fetch new data for the next page
         }
     }, [page]); // Dependency array includes page
-
+    console.log(blogs);
+    console.log(dataPerson);
     return (
         <div className="w-full px-4  flex flex-col md:flex-col gap-8">
             <InPageNavigation
@@ -146,7 +147,7 @@ function SearchBar() {
                         <div className="p-6  rounded-lg shadow-lg bg-white">
                             <h2 className="text-2xl font-semibold mb-6 text-gray-800">User Profile</h2>
                             {dataPerson.map((person, index) => (
-                                <div key={index} className="flex items-center space-x-4 mb-6">
+                                <div key={index} className="flex items-center space-x-4 mb-6" onClick={()=>navigate(`/profile/${person.personal_info.userName}`)}>
                                     <img
                                         src={person.personal_info.profile_img || '/default-avatar.png'} // Default image if no profile image exists
                                         alt={`${person.personal_info.username}'s profile`}

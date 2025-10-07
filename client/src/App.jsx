@@ -36,7 +36,7 @@ export default function App() {
           element: <SearchBar />,
         },
         {
-          path: "/profile/:id",
+          path: "/profile/:username",
           element: <ProfilePage />,
         },
         {

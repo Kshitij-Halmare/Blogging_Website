@@ -43,11 +43,12 @@ export async function trendingBlog(req, res) {
 
 export async function FindUser(req, res) {
   const { query } = req.body;
+  console.log(query);
   try {
-    const data = await UserSchema.find({ "personal_info.userName": new RegExp(query, "i") })
+    const data = await UserSchema.find({ "personal_info.full_name": new RegExp(query, "i") })
       .limit(50)
       .select("personal_info.full_name personal_info.userName personal_info.profile_img -_id");
-    // console.log("adata", data);
+    console.log("adata", data);
     // Check if users were found
     if (data.length > 0) {
       return res.status(200).json({
@@ -106,7 +107,7 @@ export async function getNotification(req, res) {
 
 
 export async function getSpecificTag(req, res) {
-  const maxLimit = 3;
+  const maxLimit = 10;
   const { query, category, page } = req.body;  // Expect 'query' or 'category' in the request body
   console.log({ query, category, page });
   let findQuery = { draft: false }; // Start by excluding drafts
@@ -277,7 +278,7 @@ export async function updateLike(req, res) {
 export async function getBlog(req, res) {
   try {
     const { page } = req.body;
-    const maxLimit = 3;
+    const maxLimit = 10;
     // console.log("page",page);
     // Fetch blogs with necessary fields populated
     const data = await BlogSchema.find({ draft: false })

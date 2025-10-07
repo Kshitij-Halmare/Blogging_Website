@@ -82,7 +82,7 @@ export async function getProfile(req, res) {
 
     // Log username for debugging purposes (optional)
     console.log('Fetching profile for username:', username);
-     username=username.id
+    //  username=username.id
     try {
         // Find user based on the username in the personal_info field
         const user = await UserSchema.findOne({ 'personal_info.userName': username })

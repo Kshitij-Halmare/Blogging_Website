@@ -301,6 +301,7 @@ function Home() {
         body: JSON.stringify({ page })
       });
       const resData = await response.json();
+      console.log(resData);
       if (resData && resData.data) {
         const formattedData = await FilterPaginationData({
           createNewArray: false,
@@ -483,7 +484,7 @@ function Home() {
                         </div>
                         {blogs.length > 0 ? (
                           <>
-                            <div className="grid grid-cols-1 gap-6">
+                            <div className="grid grid-cols-1 gap-16">
                               {blogs.map((blog, index) => (
                                 <AnimationWrapper key={index} transition={{ duration: 0.5, delay: index * 0.1 }}>
                                   <div className="transform hover:scale-[1.02] transition-all duration-300">

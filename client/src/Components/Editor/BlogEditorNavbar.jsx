@@ -1,169 +1,138 @@
-// import React, { useContext } from 'react';
-// import logo from "../../assets/sm_5b29ed73cf5c8.jpg";
-// import { EditorContext } from '../../Pages/Editor/EditorPage.jsx';
-// import toast from "react-hot-toast";
-// import { useNavigate } from "react-router-dom";
-
-// function BlogEditorNavbar() {
-//   const context = useContext(EditorContext);
-//   const blog = context?.blog || {};
-//   const setBlog = context?.setBlog;
-//   const textEditor = context?.textEditor;
-//   console.log(textEditor);
-//   const setEditorState = context?.setEditorState;
-//   const blogTitle = blog?.title || "Untitled Blog";
-//   const navigate = useNavigate();
-
-//   const handlePublish = () => {
-//     if (!blog?.title?.trim()) {
-//       return toast.error("Write a blog title to publish it.");
-//     }
-//     if (!blog?.banner?.trim()) {
-//       return toast.error("Upload a blog banner to publish it.");
-//     }
-
-//     if (textEditor) {
-//             if (data?.blocks?.length) {
-//               setBlog?.({ ...blog, content: data });
-//               setEditorState?.("publish");
-//             } else {
-//               toast.error("Write something in your blog to publish it.");
-//             }
-//       } 
-//     }
-
-
-//   const handleCancel = () => {
-//     toast("Edit cancelled.");
-//     // Additional cancel logic can be added here
-//   };
-
-//   return (
-//     <nav className="z-10 flex justify-between h-20 sticky shadow-md py-2 top-0 px-4 items-center bg-white">
-//       <div className="flex items-center">
-//         <img
-//           src={logo}
-//           alt="Logo"
-//           className="h-16 w-16 object-contain"
-//           onClick={() => navigate("/")}
-//         />
-//         <p className="pl-4 text-lg font-serif whitespace-nowrap">{blogTitle}</p>
-//       </div>
-//       <div className="flex gap-2">
-//         <button
-//           className="p-2 bg-black text-white px-3 hover:bg-slate-900 rounded-full font-serif hover:scale-105 transition-transform duration-200"
-//           onClick={handlePublish}
-//           aria-label="Publish Blog"
-//         >
-//           Publish
-//         </button>
-//         <button
-//           className="p-2 bg-slate-300 text-black px-3 hover:bg-slate-400 rounded-full font-serif hover:scale-105 transition-transform duration-200"
-//           onClick={handleCancel}
-//           aria-label="Cancel Blog Edit"
-//         >
-//           Cancel
-//         </button>
-//       </div>
-//     </nav>
-//   );
-// }
-
-// export default BlogEditorNavbar;
-
 import { useContext } from "react";
 import { EditorContext } from "../../Pages/Editor/EditorPage";
 import toast from "react-hot-toast";
-import logo from "../../assets/sm_5b29ed73cf5c8.jpg";
+import logo from "../../assets/logo.png";
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Authetication/Authentication";
 
 function BlogEditorNavbar() {
   const { blog, setBlog, textEditor, setTextEditor, setEditorState } = useContext(EditorContext);
-  const blogTitle = blog.title || "New Blog"; // Default to "New Blog" if title is not provided
+  const blogTitle = blog.title || "Untitled Blog";
   const navigate = useNavigate();
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   const handlePublish = () => {
-    if (!blog.banner.length) {
-      return toast.error("Blog Banner Required");
+    if (!blog.banner?.length) {
+      return toast.error("📸 Blog banner is required");
     }
-    if (!blog.title.length) {
-      return toast.error("Blog title Required");
+    if (!blog.title?.length) {
+      return toast.error("✍️ Blog title is required");
     }
-    if (textEditor.isReady) {
+    if (textEditor?.isReady) {
       textEditor.save().then(data => {
         if (data.blocks.length) {
           setBlog({ ...blog, content: data });
           setEditorState("publish");
         } else {
-          return toast.error("Write Something to publish");
+          return toast.error("📝 Write something to publish");
         }
       }).catch((err) => {
         console.error(err);
-        toast.error("An error occurred while saving the content");
+        toast.error("❌ An error occurred while saving the content");
       });
     }
   };
 
   const handleDraft = async () => {
-    if (!blog.banner.length) {
-      return toast.error("Blog Banner Required");
+    if (!blog.banner?.length) {
+      return toast.error("📸 Blog banner is required");
     }
-    if (!blog.title.length) {
-      return toast.error("Blog title Required");
+    if (!blog.title?.length) {
+      return toast.error("✍️ Blog title is required");
     }
 
     try {
-      console.log(user,blog);
       const response = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/user/createDraft`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ blog, authorId: user.id, draft: true, blog_id: blog.blog_id })
+        body: JSON.stringify({ 
+          blog, 
+          authorId: user.id, 
+          draft: true, 
+          blog_id: blog.blog_id 
+        })
       });
 
       const resData = await response.json();
 
       if (resData.success) {
-        toast.success("Your blog is being saved as draft.");
+        toast.success("💾 Blog saved as draft successfully!");
       } else {
-        toast.error(resData.message);
+        toast.error(resData.message || "Failed to save draft");
       }
     } catch (error) {
       console.error("Error saving blog as draft:", error);
-      toast.error("An error occurred while saving your blog. Please try again.");
+      toast.error("❌ An error occurred while saving your blog. Please try again.");
     }
   };
 
   return (
-    <nav className="z-10 flex justify-between h-20 sticky shadow-md py-2 top-0 px-4 items-center bg-white">
-      <div className="flex items-center">
-        <img
-          src={logo}
-          alt="Logo"
-          className="h-16 w-16 object-contain"
-          onClick={() => navigate("/")}
-        />
-        <p className="pl-4 text-lg font-serif whitespace-nowrap">{`${blogTitle}`}</p>
+    <nav className="z-50 sticky top-0 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 backdrop-blur-sm border-b-2 border-purple-200 shadow-lg">
+      <div className="flex justify-between items-center h-20 px-6 max-w-[1400px] mx-auto">
+        {/* Logo and Title Section */}
+        <div className="flex items-center gap-4 group">
+          <div 
+            className="relative cursor-pointer transform transition-transform duration-300 hover:scale-110"
+            onClick={() => navigate("/")}
+          >
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-16 w-16 object-contain rounded-full shadow-md ring-2 ring-purple-300 group-hover:ring-blue-500 transition-all duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-20 rounded-full transition-opacity duration-300"></div>
+          </div>
+          
+          <div className="hidden md:block">
+            <p className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent max-w-md truncate">
+              {blogTitle}
+            </p>
+            <p className="text-xs text-gray-500 font-medium">Draft in progress</p>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-3">
+          {/* Save as Draft Button */}
+          <button
+            className="group relative px-5 py-2.5 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 font-semibold rounded-full border-2 border-purple-300 hover:border-purple-500 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
+            onClick={handleDraft}
+            aria-label="Save Blog as Draft"
+          >
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+              </svg>
+              <span className="hidden sm:inline">Save Draft</span>
+              <span className="sm:hidden">Draft</span>
+            </span>
+          </button>
+
+          {/* Publish Button */}
+          <button
+            className="group relative px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
+            onClick={handlePublish}
+            aria-label="Publish Blog"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <span className="relative flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Publish</span>
+            </span>
+          </button>
+        </div>
       </div>
-      <div className="flex gap-2">
-        <button
-          className="p-2 bg-black text-white px-3 hover:bg-slate-900 rounded-full font-serif hover:scale-105 transition-transform duration-200"
-          onClick={handlePublish}
-          aria-label="Publish Blog"
-        >
-          Publish
-        </button>
-        <button
-          className="p-2 bg-slate-300 text-black px-3 hover:bg-slate-400 rounded-full font-serif hover:scale-105 transition-transform duration-200"
-          onClick={handleDraft} // Trigger save as draft
-          aria-label="Save Blog as Draft"
-        >
-          Save as Draft
-        </button>
+
+      {/* Mobile Title - Shows below navbar on small screens */}
+      <div className="md:hidden px-6 pb-3">
+        <p className="text-sm font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent truncate">
+          {blogTitle}
+        </p>
       </div>
     </nav>
   );
